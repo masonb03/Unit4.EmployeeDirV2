@@ -2,7 +2,14 @@ import express from "express";
 const app = express();
 export default app;
 
-import employees from "#db/employees";
+import employees from "./db/employees.js";
+
+app.use(express.json())
+
+app.use((req,res,next)=>{
+  console.log(req.method, req.originalUrl)
+  next()
+})
 
 app.route("/").get((req, res) => {
   res.send("Hello employees!");
@@ -32,3 +39,8 @@ app.route("/employees/:id").get((req, res) => {
 
   res.send(employee);
 });
+
+app.use((err, req, res , next)=>{
+  console.log(err)
+  res.status(400).send("An error occured!" + err)
+})
