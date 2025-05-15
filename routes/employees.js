@@ -1,4 +1,3 @@
-// routes/employees.js
 import express from "express";
 import employees from "../db/employees.js";
 
